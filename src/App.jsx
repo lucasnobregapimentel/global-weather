@@ -14,7 +14,7 @@ function App() {
   function createWeatherData(data) {
     if (data === '') return;
     setIsFetching(true);
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${data.city},${data.countryCode}&appid=${apiKey}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${data.city},${data.countryCode}&units=metric&appid=${apiKey}`)
       .then(response => setWeatherData(response))
       .catch(err => setError(err))
       .finally(() => setIsFetching(false));
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center bg-sky-300'>
-      <div className='w-[350px] bg-sky-400 rounded-xl p-8 text-white text-center'>
+      <div className='w-[350px] bg-sky-400 rounded-xl p-8 text-white text-center shadow-xl'>
         <h1 className='text-2xl font-bold border border-sky-400 border-b-sky-500 pb-3 mb-4'>Global Weather</h1>
         <div>
           <form className='flex justify-between items-center' onSubmit={handleSubmit(createWeatherData)}>
@@ -52,7 +52,8 @@ function App() {
           </form>
         </div>
         <div>
-          {weatherData && <WeatherApp />}
+          {isFetching && <p>Carregando...</p>}
+          {weatherData && <WeatherApp city={weatherData.data.name} country={weatherData.data.sys.country} temp={weatherData.data.main.temp} weather={weatherData.data.weather[0].description} icon={weatherData.data.weather[0].icon} humidity={weatherData.data.main.humidity} wind={weatherData.data.wind.speed} />}
         </div>
       </div>
     </div >
