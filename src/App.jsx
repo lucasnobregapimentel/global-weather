@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useState } from 'react';
+import WeatherApp from './components/WeatherApp';
 
 const apiKey = 'c0f67c16d3aea2763a1f8a46ed22df0c';
 
@@ -49,6 +50,9 @@ function App() {
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
+        </div>
+        <div>
+          {weatherData && <WeatherApp />}
         </div>
       </div>
     </div >
