@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import WeatherApp from './components/WeatherApp';
 
-const apiKey = 'c0f67c16d3aea2763a1f8a46ed22df0c';
+const apiKey = '';
 
 function App() {
   const { register, handleSubmit } = useForm();
