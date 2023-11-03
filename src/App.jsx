@@ -46,7 +46,7 @@ function App() {
                 />
               </div>
             </div>
-            <button className='bg-sky-500 p-4 rounded-xl duration-150 hover:bg-sky-600 w-16' type="submit">
+            <button className='bg-sky-500 p-4 rounded-xl duration-150 hover:bg-sky-600 w-16 hover:scale-110' type="submit">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
