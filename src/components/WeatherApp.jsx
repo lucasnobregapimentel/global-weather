@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import { WeatherApiContext } from '../context/WeatherApiContext';
 
-const WeatherApp = ({ city, country, temp, weather, icon, humidity, wind }) => {
+const WeatherApp = () => {
+  const { data } = useContext(WeatherApiContext);
 
   let weatherDescription = '';
 
-  switch (icon) {
+  switch (data.data.weather[0].icon) {
     case '01d':
       weatherDescription = 'Céu limpo';
       break;
@@ -70,21 +73,21 @@ const WeatherApp = ({ city, country, temp, weather, icon, humidity, wind }) => {
         <i className="fa-solid fa-bars absolute top-1 right-0 duration-150 hover:scale-125"></i>
       </Link>
       <div>
-        <h3 className="mb-2">{city}, {country}</h3>
-        <h1 className="text-4xl font-bold">{temp}°C</h1>
+        <h3 className="mb-2">{data.data.name}, {data.data.sys.country}</h3>
+        <h1 className="text-4xl font-bold">{data.data.main.temp.toFixed(1)}°C</h1>
       </div>
       <div className="flex justify-center items-center my-2">
         <span>{weatherDescription}</span>
-        <img className="w-16" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="Weather Icon" />
+        <img className="w-16" src={`https://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`} alt="Weather Icon" />
       </div>
       <div className="flex">
         <div>
           <i className="fa-solid fa-droplet"></i>
-          <span className="ml-2">{humidity}%</span>
+          <span className="ml-2">{data.data.main.humidity}%</span>
         </div>
         <div className="ml-16">
           <i className="fa-solid fa-wind"></i>
-          <span className="ml-2">{wind}km/h</span>
+          <span className="ml-2">{data.data.wind.speed}km/h</span>
         </div>
       </div>
     </div>

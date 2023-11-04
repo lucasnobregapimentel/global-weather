@@ -8,6 +8,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './routes/ErrorPage.jsx'
 import MoreInfo from './routes/MoreInfo.jsx'
 
+import { WeatherApiContextProvider } from './context/WeatherApiContext.jsx'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <WeatherApiContextProvider>
+      <RouterProvider router={router} />
+    </WeatherApiContextProvider>
   </React.StrictMode>,
 )

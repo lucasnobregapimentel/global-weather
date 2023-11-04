@@ -1,24 +1,19 @@
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import { useState } from 'react';
 import WeatherApp from './components/WeatherApp';
-
-const apiKey = '7f2842be09735b3b26ec4dc10e6fe0f3';
+import { useContext } from 'react';
+import { WeatherApiContext } from './context/WeatherApiContext';
 
 function App() {
   const { register, handleSubmit } = useForm();
-  const [weatherData, setWeatherData] = useState(null);
-  const [error, setError] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
+  const { setCity, setCountryCode, data, isFetching } = useContext(WeatherApiContext);
 
   function createWeatherData(data) {
     if (data === '') return;
-    setIsFetching(true);
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${data.city},${data.countryCode}&units=metric&appid=${apiKey}`)
-      .then(response => setWeatherData(response))
-      .catch(err => setError(err))
-      .finally(() => setIsFetching(false));
+    setCity(data.city)
+    setCountryCode(data.countryCode)
   }
+
+  console.log(data)
 
   return (
     <div className='flex flex-col h-screen justify-center items-center bg-sky-300'>
@@ -52,8 +47,8 @@ function App() {
           </form>
         </div>
         <div>
-          {isFetching && <p>Carregando...</p>}
-          {weatherData && <WeatherApp city={weatherData.data.name} country={weatherData.data.sys.country} temp={weatherData.data.main.temp.toFixed(1)} weather={weatherData.data.weather[0].description} icon={weatherData.data.weather[0].icon} humidity={weatherData.data.main.humidity} wind={weatherData.data.wind.speed} />}
+          {isFetching && <p className='mt-4'>Carregando...</p>}
+          {data && <WeatherApp />}
         </div>
       </div>
     </div >
