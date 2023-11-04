@@ -13,6 +13,7 @@ export const WeatherApiContextProvider = ({ children }) => {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&units=metric&appid=${myKey}`;
 
   useEffect(() => {
+    if (city === null || countryCode === null) return;
     setIsFetching(true)
     axios.get(url)
       .then(response => setData(response))

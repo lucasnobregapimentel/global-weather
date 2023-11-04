@@ -13,8 +13,6 @@ function App() {
     setCountryCode(data.countryCode)
   }
 
-  console.log(data)
-
   return (
     <div className='flex flex-col h-screen justify-center items-center bg-sky-300'>
       <div className='w-[350px] bg-sky-400 rounded-xl p-8 text-white text-center shadow-xl'>
