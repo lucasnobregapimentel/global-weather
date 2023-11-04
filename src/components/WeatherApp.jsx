@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const WeatherApp = ({ city, country, temp, weather, icon, humidity, wind }) => {
 
   let weatherDescription = '';
@@ -63,7 +65,10 @@ const WeatherApp = ({ city, country, temp, weather, icon, humidity, wind }) => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center mt-6">
+    <div className="flex flex-col justify-center items-center mt-6 relative">
+      <Link to='info'>
+        <i className="fa-solid fa-bars absolute top-1 right-0 duration-150 hover:scale-125"></i>
+      </Link>
       <div>
         <h3 className="mb-2">{city}, {country}</h3>
         <h1 className="text-4xl font-bold">{temp}°C</h1>

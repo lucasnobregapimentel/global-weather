@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import WeatherApp from './components/WeatherApp';
 
-const apiKey = '';
+const apiKey = '7f2842be09735b3b26ec4dc10e6fe0f3';
 
 function App() {
   const { register, handleSubmit } = useForm();
@@ -53,7 +53,7 @@ function App() {
         </div>
         <div>
           {isFetching && <p>Carregando...</p>}
-          {weatherData && <WeatherApp city={weatherData.data.name} country={weatherData.data.sys.country} temp={weatherData.data.main.temp} weather={weatherData.data.weather[0].description} icon={weatherData.data.weather[0].icon} humidity={weatherData.data.main.humidity} wind={weatherData.data.wind.speed} />}
+          {weatherData && <WeatherApp city={weatherData.data.name} country={weatherData.data.sys.country} temp={weatherData.data.main.temp.toFixed(1)} weather={weatherData.data.weather[0].description} icon={weatherData.data.weather[0].icon} humidity={weatherData.data.main.humidity} wind={weatherData.data.wind.speed} />}
         </div>
       </div>
     </div >
