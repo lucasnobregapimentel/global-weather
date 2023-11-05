@@ -2,15 +2,19 @@ import { useForm } from 'react-hook-form';
 import WeatherApp from './components/WeatherApp';
 import { useContext } from 'react';
 import { WeatherApiContext } from './context/WeatherApiContext';
+import { WeatherApiForecastContext } from './context/WeatherApiForecastContext';
 
 function App() {
   const { register, handleSubmit } = useForm();
   const { setCity, setCountryCode, data, isFetching } = useContext(WeatherApiContext);
+  const { setCityForecast, setCountryCodeForecast } = useContext(WeatherApiForecastContext);
 
   function createWeatherData(data) {
     if (data === '') return;
-    setCity(data.city)
-    setCountryCode(data.countryCode)
+    setCity(data.city);
+    setCountryCode(data.countryCode);
+    setCityForecast(data.city);
+    setCountryCodeForecast(data.countryCode);
   }
 
   return (

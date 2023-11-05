@@ -1,8 +1,12 @@
 import { useContext } from 'react';
 import { WeatherApiContext } from '../context/WeatherApiContext';
+import { WeatherApiForecastContext } from '../context/WeatherApiForecastContext';
 
 const MoreInfo = () => {
   const { data } = useContext(WeatherApiContext);
+  const { dataForecast } = useContext(WeatherApiForecastContext);
+
+  console.log(dataForecast);
 
   let weatherDescription = '';
 
@@ -66,6 +70,25 @@ const MoreInfo = () => {
       break
   }
 
+  function formatDate(date) {
+    const year = date.substring(0, 4);
+    const month = date.substring(5, 7);
+    const day = date.substring(8, 10);
+
+    const str = `${day}/${month}/${year}`
+
+    return str;
+  }
+
+  function getTime(date) {
+    const hours = date.substring(11, 13);
+    const minutes = date.substring(14, 16);
+
+    const str = `${hours}:${minutes}`;
+
+    return str;
+  }
+
   return (
     <div className="flex justify-center items-center h-screen bg-sky-300 text-white">
       <div className="w-5/6 bg-sky-400 h-5/6 p-8 rounded-xl shadow-xl flex gap-4">
@@ -105,8 +128,33 @@ const MoreInfo = () => {
             </div>
           </div>
         </div>
-        <div className="w-2/3 h-full bg-sky-500 rounded-xl">
-
+        <div className="w-2/3 h-full bg-sky-500 rounded-xl p-8">
+          <h1 className='text-2xl border border-sky-500 border-b-sky-600 pb-3 mb-4'>Previsão do tempo durante 5 dias</h1>
+          <div className='flex overflow-x-scroll'>
+            {dataForecast && dataForecast.data.list.map((item) => (
+              <div key={item.dt} className='px-4 py-2 flex flex-col justify-center items-center border border-sky-600 rounded-xl mb-4 ml-4 first:ml-0'>
+                <div className='flex flex-col justify-center items-center'>
+                  <img className='w-16' src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt="Weather Icon" />
+                  <div className='flex flex-col'>
+                    <div className='flex justify-center items-center'>
+                      <i className="fa-solid fa-temperature-arrow-up"></i>
+                      <span className="ml-2">{item.main.temp_max.toFixed(1)}°C</span>
+                    </div>
+                    <div className='flex justify-center items-center'>
+                      <i className="fa-solid fa-temperature-arrow-down"></i>
+                      <span className="ml-2">{item.main.temp_min.toFixed(1)}°C</span>
+                    </div>
+                  </div>
+                </div>
+                <div className='mt-2'>
+                  {formatDate(item.dt_txt)}
+                </div>
+                <div className='mt-2'>
+                  {getTime(item.dt_txt)}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
