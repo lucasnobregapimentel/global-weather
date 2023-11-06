@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
-const myKey = '13e825d3494a6ef7ec7dee82f3e48880';
+const myKey = '';
 export const WeatherApiForecastContext = createContext();
 
 export const WeatherApiForecastContextProvider = ({ children }) => {
