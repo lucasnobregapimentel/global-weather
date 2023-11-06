@@ -92,7 +92,7 @@ const MoreInfo = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-sky-300 text-white">
       <div className="w-5/6 bg-sky-400 h-5/6 p-8 rounded-xl shadow-xl flex gap-4">
-        <div className="w-1/3 h-full bg-sky-500 rounded-xl flex justify-center items-center">
+        <div className="w-1/3 h-full bg-sky-400 flex justify-center items-center border border-sky-400 border-r-sky-500">
           <div className="flex flex-col justify-center items-center p-8">
             <div className="flex justify-center items-center flex-col">
               <h3 className="mb-2">{data.data.name}, {data.data.sys.country}</h3>
@@ -128,8 +128,8 @@ const MoreInfo = () => {
             </div>
           </div>
         </div>
-        <div className="w-2/3 h-full bg-sky-500 rounded-xl p-8">
-          <h1 className='text-2xl border border-sky-500 border-b-sky-600 pb-3 mb-4'>Previsão do tempo durante 5 dias</h1>
+        <div className="w-2/3 h-full bg-sky-400 rounded-xl p-8">
+          <h1 className='text-2xl border border-sky-400 border-b-sky-500 pb-3 mb-4'>Previsão do tempo durante 5 dias</h1>
           <div className='flex overflow-x-scroll'>
             {dataForecast && dataForecast.data.list.map((item) => (
               <div key={item.dt} className='px-4 py-2 flex flex-col justify-center items-center border border-sky-600 rounded-xl mb-4 ml-4 first:ml-0'>
